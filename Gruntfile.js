@@ -77,10 +77,10 @@ module.exports = function(grunt) {
     uglify: {
       my_target: {
         options: {
-          compress: true,
+          compress: {},
           mangle: true,
           preserveComments: "some",
-          report: "min"
+          report: "min",
         },
         files: {
           'dist/markdown.min.js': ['dist/markdown.js']
