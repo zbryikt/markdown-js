@@ -100,10 +100,13 @@ define(['./core', './markdown_helpers'], function(Markdown, MarkdownHelpers) {
     }
   }
 
-  function render_tree( jsonml ) {
+  function render_tree( jsonml, options ) {
+    options = options || {};
+    // escape HTML in strings?
+    options.escape = options.escape || false;
     // basic case
     if ( typeof jsonml === "string" )
-      return escapeHTML( jsonml );
+      return options.escape ? escapeHTML( jsonml ) : jsonml;
 
     var tag = jsonml.shift(),
         attributes = {},
@@ -113,7 +116,7 @@ define(['./core', './markdown_helpers'], function(Markdown, MarkdownHelpers) {
       attributes = jsonml.shift();
 
     while ( jsonml.length )
-      content.push( render_tree( jsonml.shift() ) );
+      content.push( render_tree( jsonml.shift(), {escape: tag == 'code'} ) );
 
     var tag_attrs = "";
     if (typeof attributes.src !== 'undefined') {
