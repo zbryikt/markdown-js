@@ -116,7 +116,7 @@ define(['./core', './markdown_helpers'], function(Markdown, MarkdownHelpers) {
       attributes = jsonml.shift();
 
     while ( jsonml.length )
-      content.push( render_tree( jsonml.shift(), {escape: tag == 'code'} ) );
+      content.push( render_tree( jsonml.shift(), {escape: tag === 'code'} ) );
 
     var tag_attrs = "";
     if (typeof attributes.src !== 'undefined') {
